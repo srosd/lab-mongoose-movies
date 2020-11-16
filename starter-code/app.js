@@ -8,12 +8,13 @@ const hbs          = require('hbs');
 const mongoose     = require('mongoose');
 const logger       = require('morgan');
 const path         = require('path');
+const chalk        = require('chalk');
 
 
 mongoose
   .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
   .then(x => {
-    console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
+    console.log(chalk.green.inverse.bold(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
   })
   .catch(err => {
     console.error('Error connecting to mongo', err)
