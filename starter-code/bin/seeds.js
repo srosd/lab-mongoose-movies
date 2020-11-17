@@ -1,4 +1,7 @@
+const mongoose = require('mongoose');
 const Celebrity = require("../models/Celebrity.model");
+
+mongoose.connect('mongodb://localhost/lab-mongoose-movies');
 
 const celebrities = [
     {
@@ -19,7 +22,14 @@ const celebrities = [
 ];
 
 Celebrity.create(celebrities)
-    .then((result)=>{
-        console.log(result);
+    .then(()=>{
+        console.log(`Created ${celebrities.length} celebrities.`);
+        mongoose.connection.close(()=>{
+            console.log('Mongoose connection closed.');
+        });
     })
     .catch((err)=>console.log(err));
+
+
+
+    

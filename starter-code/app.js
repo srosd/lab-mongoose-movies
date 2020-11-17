@@ -12,13 +12,16 @@ const chalk        = require('chalk');
 
 
 mongoose
-  .connect('mongodb://localhost/starter-code', {useNewUrlParser: true})
-  .then(x => {
-    console.log(chalk.green.inverse.bold(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
+  .connect('mongodb://localhost/lab-mongoose-movies', {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    useFindAndModify: true
   })
-  .catch(err => {
-    console.error('Error connecting to mongo', err)
-  });
+  .then(x =>
+    console.log(chalk.yellow.inverse.bold(`Connected to Mongo! Database name: "${x.connections[0].name}"`))
+  )
+  .catch(err => console.error('Error connecting to mongo', err));
 
 const app_name = require('./package.json').name;
 const debug = require('debug')(`${app_name}:${path.basename(__filename).split('.')[0]}`);
